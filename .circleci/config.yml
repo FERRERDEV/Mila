@@ -8,7 +8,7 @@ jobs:
     executor: python/default
     steps:
       - checkout
-        - run:
+      - run:
           command:  sudo pip install -U platformio
           name: Install platformio
       - run:
