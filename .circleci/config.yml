@@ -12,6 +12,7 @@ jobs:
     executor: python/default
     steps:
       - checkout
+      - compile
 
 compile:
     override:
