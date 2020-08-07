@@ -12,7 +12,9 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - compile
+      - run:
+          command: platformio run ${CIRCLE_WORKING_DIRECTORY}/Firmware -e nanoatmega328
+          name: Build
 
 compile:
     override:
