@@ -1,22 +1,12 @@
 #pragma once
 
-// Includes
+// Sensors
 #include "BMP280.h"
-
-/**
- * Modes to control the jump state.
- */
-enum modes
-{
-	Ground,
-	Plane,
-	Freefall
-};
 
 /**
  * Struct to hold the altimeter data.
  */
-struct data
+struct altimeter_data
 {
 	/* Reference altitude of the ground. It will be set on initialization. */
 	float groundAltitude = 0.f;
@@ -24,10 +14,8 @@ struct data
 	float altitude = 0.f;
 	/* Previous altitude read. */
 	float deltaAltitude = 0.f;
-	/* Vertical speed. */
-	float speed = 0.f; // m/s
-	/* Mode to control the jump state. */
-	modes mode = modes::Ground;
+	/* Vertical speed in m/s. */
+	float speed = 0.f;
 };
 
 /**
@@ -43,24 +31,25 @@ public:
 	Altimeter(float tolerance);
 
 	/*!
-	 * @brief  Check and initialize the altimeter.
+	 * @brief  Check the sensor and initialize the altimeter.
 	 * @return true on successful initialization.
 	 */
-	bool begin();
+	bool setup();
 
 	/*!
 	 * @brief  Calculates and return all the altitudes data.
 	 * @return Altimeter data.
 	 */
-	data getData();
+	altimeter_data getData();
+	
 private:
 	/* Barometric sensor. */
 	BMP280 barometricSensor;
 
 	/* Altimeter tolerance config. */
-	float _tolerance;
+	float tolerance;
 
 	/* Altimeter data. */
-	data _data;
+	altimeter_data data;
 };
 

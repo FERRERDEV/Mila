@@ -1,14 +1,11 @@
-#pragma once
-
-// Includes
 #include "Altimeter.h"
 
-Altimeter::Altimeter(float _tolerance)
+Altimeter::Altimeter(float tolerance)
 {
-	this->_tolerance = _tolerance;
+	this->tolerance = tolerance;
 }
 
-bool Altimeter::begin()
+bool Altimeter::setup()
 {
 	// Barometric sensor setup
 	if (!barometricSensor.begin())
@@ -27,42 +24,25 @@ bool Altimeter::begin()
 	);
 
 	// Set the ground altitude
-	_data.groundAltitude = barometricSensor.readAltitudeFeets();
+	data.groundAltitude = barometricSensor.readAltitudeFeets();
 
 	return true;
 }
 
-data Altimeter::getData()
+altimeter_data Altimeter::getData()
 {
-	float TickAltitude = barometricSensor.readAltitudeFeets() - _data.groundAltitude;
+	float currentAltitude = barometricSensor.readAltitudeFeets() - data.groundAltitude;
 
-	// Only set variables if the value is above or below the tolerance
-	if (TickAltitude - _data.deltaAltitude >= _tolerance)
+	// Only update variables if the value is above or below the tolerance
+	if (currentAltitude - data.deltaAltitude >= tolerance)
 	{
 		// Set variables
-		_data.altitude = TickAltitude;
-		_data.speed = (_data.deltaAltitude - _data.altitude) * 0.3048f;
-
-		// Set the jump mode
-		if (_data.altitude <= _data.altitude + 20)
-		{
-			_data.mode = modes::Ground;
-		}
-		else
-		{
-			if (_data.altitude >= _data.deltaAltitude)
-			{
-				_data.mode = modes::Plane;
-			}
-			else
-			{
-				_data.mode = modes::Freefall;
-			}
-		}
+		data.altitude = currentAltitude;
+		data.speed = (data.deltaAltitude - data.altitude) * 0.3048f;
 	}
 
-	// Save delta altitude
-	_data.deltaAltitude = _data.altitude;
+	// Set delta altitude
+	data.deltaAltitude = data.altitude;
 
-	return _data;
+	return data;
 }

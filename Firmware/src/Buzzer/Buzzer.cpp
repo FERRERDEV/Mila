@@ -1,13 +1,16 @@
-#pragma once
-
-// Includes
+// Buzzer
 #include "Buzzer.h"
+
+// Arduino
 #include "Arduino.h"
 
-Buzzer::Buzzer(int BUZZER_PIN)
+// Mila
+#include "Mila.h"
+
+Buzzer::Buzzer(int buzzerPin)
 {
 	// Assign the buzzer pin.
-	this->BUZZER_PIN = BUZZER_PIN;
+	this->buzzerPin = buzzerPin;
 }
 
 void Buzzer::playAlarm(alarm alarmToPlay, int loops)
@@ -23,7 +26,7 @@ void Buzzer::playAlarm(alarm alarmToPlay, int loops)
 
 			for (int i = 0; i < alarmToPlay.Lenght; i++)
 			{
-				tone(BUZZER_PIN, alarmToPlay.Cue[i].Tone, alarmToPlay.Cue[i].Duration);
+				tone(buzzerPin, alarmToPlay.Cue[i].Tone, alarmToPlay.Cue[i].Duration);
 				delay(alarmToPlay.Time);
 			}
 			delay(alarmToPlay.Time);
