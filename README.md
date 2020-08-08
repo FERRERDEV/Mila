@@ -1,5 +1,5 @@
 # Mila
-[![CircleCI Build Status](https://circleci.com/gh/FERRERDEV/Mila/tree/develop?style=shield)](https://circleci.com/gh/FERRERDEV/Mila/tree/develop)
+[![Build Status](https://circleci.com/gh/FERRERDEV/Mila/tree/develop.svg?style=svg)](https://circleci.com/gh/FERRERDEV/Mila/tree/develop)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FERRERDEV/Mila/master/LICENSE)
 
 ### Overview
