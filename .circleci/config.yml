@@ -12,7 +12,7 @@ jobs:
           command:  sudo pip install -U platformio
           name: Install platformio
       - run:
-          command: platformio run ${CIRCLE_WORKING_DIRECTORY}/Firmware -e nanoatmega328
+          command: platformio run /Firmware/ -e nanoatmega328
           name: Build
 
 workflows:
