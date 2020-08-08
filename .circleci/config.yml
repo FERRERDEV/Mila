@@ -1,0 +1,21 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          command:  sudo pip install -U platformio
+          name: Install platformio
+      - run:
+          command: platformio run -d /home/circleci/project/Firmware
+          name: Build
+
+workflows:
+  main:
+    jobs:
+      - build
