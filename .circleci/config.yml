@@ -12,7 +12,7 @@ jobs:
           command:  sudo pip install -U platformio
           name: Install platformio
       - run:
-          command: platformio run -d /home/circleci/project/Firmware/platformio.ini
+          command: platformio run -d ${CIRCLE_WORKING_DIRECTORY}/Firmware
           name: Build
 
 workflows:
